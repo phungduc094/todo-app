@@ -1,36 +1,135 @@
 :root{
-  --bg:#f7f7fb;
-  --card:#fff;
-  --accent:#4b6cff;
-  --muted:#666;
+  --bg:#f1f5ff;
+  --bg-glow:#e7edff;
+  --card:rgba(255,255,255,0.92);
+  --text:#172033;
+  --accent:#4f6df5;
+  --accent-strong:#3f5be0;
+  --accent-soft:#eef2ff;
+  --danger:#e85f72;
+  --danger-soft:#fff1f4;
+  --border:#dfe5ff;
+  --muted:#61708a;
 }
 *{box-sizing:border-box}
 body{
   margin:0;
-  font-family:system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial;
-  background:var(--bg);
-  color:#111;
+  font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial,sans-serif;
+  background:radial-gradient(circle at top, var(--bg-glow), var(--bg) 42%);
+  color:var(--text);
   display:flex;
   align-items:center;
   justify-content:center;
   min-height:100vh;
+  padding:24px;
 }
 .container{
   width:100%;
-  max-width:520px;
+  max-width:580px;
   background:var(--card);
-  padding:24px;
-  border-radius:12px;
-  box-shadow:0 6px 20px rgba(15,20,30,0.08);
+  backdrop-filter:blur(8px);
+  padding:30px;
+  border-radius:20px;
+  border:1px solid rgba(255,255,255,0.8);
+  box-shadow:0 18px 45px rgba(27,42,89,0.14);
 }
-h1{margin:0 0 16px 0;font-size:1.6rem}
-.input-row{display:flex;gap:8px;margin-bottom:16px}
-#todo-input{flex:1;padding:10px 12px;border:1px solid #e6e9ef;border-radius:8px;font-size:1rem}
-#add-btn{background:var(--accent);color:#fff;border:none;padding:10px 14px;border-radius:8px;cursor:pointer}
+.header{margin-bottom:20px}
+h1{
+  margin:0;
+  font-size:2rem;
+  letter-spacing:-0.03em;
+}
+.subtitle{
+  margin:8px 0 0;
+  color:var(--muted);
+  font-size:0.98rem;
+}
+.input-row{
+  display:flex;
+  gap:10px;
+  margin-bottom:20px;
+}
+#todo-input{
+  flex:1;
+  padding:12px 14px;
+  border:1px solid var(--border);
+  border-radius:12px;
+  font-size:1rem;
+  background:#fff;
+  transition:border-color .2s ease, box-shadow .2s ease;
+}
+#todo-input:focus{
+  outline:none;
+  border-color:var(--accent);
+  box-shadow:0 0 0 3px rgba(79,109,245,.18);
+}
+#add-btn{
+  background:var(--accent);
+  color:#fff;
+  border:none;
+  padding:12px 16px;
+  border-radius:12px;
+  font-weight:600;
+  cursor:pointer;
+  transition:transform .2s ease, background-color .2s ease, box-shadow .2s ease;
+}
+#add-btn:hover{
+  background:var(--accent-strong);
+  transform:translateY(-1px);
+  box-shadow:0 8px 16px rgba(79,109,245,.3);
+}
+#add-btn:active{transform:translateY(0)}
 .todo-list{list-style:none;padding:0;margin:0}
-.todo-item{display:flex;align-items:center;justify-content:space-between;padding:10px 12px;border:1px solid #eef0f6;border-radius:8px;margin-bottom:8px}
-.todo-text{flex:1;margin-right:12px;cursor:pointer}
-.todo-text.completed{text-decoration:line-through;color:#9aa0a6}
-.delete-btn{background:transparent;border:1px solid #ff6b6b;color:#ff4b4b;padding:6px 8px;border-radius:6px;cursor:pointer}
-.delete-btn:hover{opacity:0.9}
-.muted{color:var(--muted);font-size:0.9rem}
+.todo-item{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:12px 14px;
+  border:1px solid var(--border);
+  border-radius:12px;
+  margin-bottom:10px;
+  background:#fff;
+  animation:item-in .28s ease both;
+}
+@keyframes item-in{
+  from{opacity:0;transform:translateY(6px) scale(.99)}
+  to{opacity:1;transform:translateY(0) scale(1)}
+}
+.todo-text{
+  flex:1;
+  margin-right:12px;
+  cursor:pointer;
+  transition:color .2s ease, opacity .2s ease;
+}
+.todo-text:hover{color:var(--accent-strong)}
+.todo-text.completed{
+  text-decoration:line-through;
+  color:#8d98b0;
+}
+.delete-btn{
+  background:var(--danger-soft);
+  border:1px solid rgba(232,95,114,.25);
+  color:var(--danger);
+  padding:7px 10px;
+  border-radius:8px;
+  font-weight:600;
+  cursor:pointer;
+  transition:transform .18s ease, background-color .18s ease;
+}
+.delete-btn:hover{
+  background:#ffe8ee;
+  transform:translateY(-1px);
+}
+.muted{
+  color:var(--muted);
+  font-size:0.95rem;
+  background:var(--accent-soft);
+  border:1px dashed #ccd7ff;
+  border-radius:12px;
+  padding:14px;
+  text-align:center;
+}
+
+@media (prefers-reduced-motion:reduce){
+  *{animation:none!important;transition:none!important}
+}

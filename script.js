@@ -25,7 +25,7 @@
     const todos = loadTodos();
     list.innerHTML = '';
     if(todos.length===0){
-      const el = document.createElement('p');
+      const el = document.createElement('li');
       el.className = 'muted';
       el.textContent = 'No todos yet — add one above.';
       list.appendChild(el);
