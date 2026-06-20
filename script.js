@@ -77,6 +77,33 @@
   addBtn.addEventListener('click', addTodo);
   input.addEventListener('keydown', (e)=>{ if(e.key==='Enter') addTodo(); });
 
+  // theme handling
+  function applyTheme(theme){
+    if(theme === 'dark') document.documentElement.setAttribute('data-theme','dark');
+    else document.documentElement.removeAttribute('data-theme');
+    const btn = document.getElementById('theme-toggle');
+    if(btn) btn.textContent = theme==='dark' ? '☀️' : '🌙';
+  }
+
+  function loadTheme(){
+    return localStorage.getItem('theme') || (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+  }
+
+  function saveTheme(theme){ localStorage.setItem('theme', theme); }
+
+  document.addEventListener('DOMContentLoaded', ()=>{
+    const current = loadTheme();
+    applyTheme(current);
+    const toggle = document.getElementById('theme-toggle');
+    if(toggle){
+      toggle.addEventListener('click', ()=>{
+        const next = document.documentElement.getAttribute('data-theme')==='dark' ? 'light' : 'dark';
+        applyTheme(next);
+        saveTheme(next);
+      });
+    }
+  });
+
   // initial render
   render();
 })();
